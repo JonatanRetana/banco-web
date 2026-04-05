@@ -1,37 +1,123 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Cliente encontrado</title>
+  <title>Dashboard Cliente</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: white;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 30px;
+    }
+
+    h1, h2 {
+      margin-bottom: 15px;
+    }
+
+    .acciones {
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 15px;
+      background: #22c55e;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+
+    .btn:hover {
+      background: #16a34a;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
 <body>
 
-<h1>Datos del Cliente</h1>
+<div class="container">
+  <h1>Bienvenido Cliente</h1>
 
-<p><strong>ID:</strong> <%= cliente.id_cliente %></p>
-<p><strong>Nombre:</strong> <%= cliente.nombre %></p>
-<p><strong>Apellido:</strong> <%= cliente.apellido %></p>
-<p><strong>DPI:</strong> <%= cliente.dpi %></p>
-<p><strong>NIT:</strong> <%= cliente.nit %></p>
-<p><strong>Correo:</strong> <%= cliente.correo %></p>
+  <div class="acciones">
+    <a href="/solicitar-credito/1" class="btn">Solicitar crédito</a>
+    <a href="/solicitar-cuenta/1" class="btn">Solicitar apertura de cuenta</a>
+  </div>
 
-<br>
+  <div class="card">
+    <h2>Mis cuentas</h2>
+    <ul>
+      <% if (cuentas.length === 0) { %>
+        <li>No hay cuentas registradas</li>
+      <% } else { %>
+        <% cuentas.forEach(cuenta => { %>
+          <li>
+            <%= cuenta.nombre_tipo %> -
+            Número: <%= cuenta.numero_cuenta %> -
+            Saldo: Q<%= cuenta.saldo %>
+          </li>
+        <% }) %>
+      <% } %>
+    </ul>
+  </div>
 
-<a href="/cliente/<%= cliente.id_cliente %>">
-  <button>Ver panel del cliente</button>
-</a>
+  <div class="card">
+    <h2>Mis préstamos</h2>
+    <ul>
+      <% if (prestamos.length === 0) { %>
+        <li>No hay préstamos registrados</li>
+      <% } else { %>
+        <% prestamos.forEach(prestamo => { %>
+          <li>
+            <%= prestamo.nombre_tipo %> -
+            Monto: Q<%= prestamo.monto %> -
+            Saldo: Q<%= prestamo.saldo_pendiente %>
+          </li>
+        <% }) %>
+      <% } %>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Mis pagos</h2>
+    <ul>
+      <% if (pagos.length === 0) { %>
+        <li>No hay pagos registrados</li>
+      <% } else { %>
+        <% pagos.forEach(pago => { %>
+          <li>
+            Préstamo #<%= pago.id_prestamo %> -
+            Fecha: <%= pago.fecha_pago %> -
+            Pagado: Q<%= pago.monto_pagado %> -
+            Mora: Q<%= pago.mora %> -
+            Saldo restante: Q<%= pago.saldo_restante %>
+          </li>
+        <% }) %>
+      <% } %>
+    </ul>
+  </div>
+</div>
 
 </body>
 </html>
-<a href="/colaborador/cuentas/<%= cliente.id_cliente %>">
-    <button>Ver cuentas del cliente</button>
-  </a>
-  <a href="/colaborador/prestamos/<%= cliente.id_cliente %>">
-    <button>Ver préstamos del cliente</button>
-  </a>
-  <a href="/solicitar-credito/<%= cliente.id_cliente %>">
-    <button>Solicitar crédito para este cliente</button>
-  </a>
-  
-  <a href="/solicitar-cuenta/<%= cliente.id_cliente %>">
-    <button>Solicitar cuenta para este cliente</button>
-  </a>
