@@ -447,26 +447,26 @@ app.get('/test-db', async (req, res) => {
   });
 const PORT = process.env.PORT || 3000;
 app.post('/buscar-cliente', async (req, res) => {
-    const { id_cliente } = req.body;
-  
-    try {
-      const result = await pool.query(
-        'SELECT * FROM clientes WHERE id_cliente = $1',
-        [id_cliente]
-      );
-  
-      if (result.rows.length === 0) {
-        return res.send('Cliente no encontrado');
-      }
-  
-      const cliente = result.rows[0];
-      res.render('ver_cliente', { cliente });
-  
-    } catch (error) {
-      console.error('ERROR AL BUSCAR CLIENTE:', error);
-      res.send('Error al buscar cliente');
+  const { id_cliente } = req.body;
+
+  try {
+    const result = await pool.query(
+      'SELECT * FROM clientes WHERE id_cliente = $1',
+      [id_cliente]
+    );
+
+    if (result.rows.length === 0) {
+      return res.send('Cliente no encontrado');
     }
-  });
+
+    const cliente = result.rows[0];
+    res.render('ver_cliente', { cliente });
+
+  } catch (error) {
+    console.error('ERROR AL BUSCAR CLIENTE:', error);
+    res.status(500).send('Error interno al buscar cliente');
+  }
+});
   app.get('/colaborador/cuentas/:id', async (req, res) => {
     const id_cliente = req.params.id;
   
