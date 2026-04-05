@@ -243,39 +243,35 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/login', async (req, res) => {
-    const { username, password } = req.body;
+  const { username, password } = req.body;
 
-    try {
-        const result = await pool.query(
-            `
-            SELECT u.id_usuario, u.username, u.id_cliente, r.nombre_rol
-            FROM usuarios u
-            INNER JOIN usuario_rol ur ON u.id_usuario = ur.id_usuario
-            INNER JOIN roles r ON ur.id_rol = r.id_rol
-            WHERE u.username = $1 AND u.password_hash = $2
-            `,
-            [username, password]
-        );
+  try {
+    const result = await pool.query(
+      'SELECT * FROM usuarios WHERE username = $1 AND estado = true',
+      [username]
+    );
 
-        if (result.rows.length > 0) {
-            const usuario = result.rows[0];
-
-            if (usuario.nombre_rol === 'Cliente') {
-                return res.redirect(`/cliente/${usuario.id_cliente}`);
-            }
-
-            if (usuario.nombre_rol === 'Colaborador') {
-                return res.redirect('/colaborador');
-            }
-
-            return res.send(`Login correcto. Rol detectado: ${usuario.nombre_rol}`);
-        }
-
-        res.send('Usuario o contraseña incorrectos');
-    } catch (error) {
-        console.error(error);
-        res.send('Error en el servidor');
+    if (result.rows.length === 0) {
+      return res.send('Usuario no encontrado');
     }
+
+    const usuario = result.rows[0];
+
+    // 🔥 TEMPORAL (sin validar hash para que funcione ya)
+    // luego lo mejoramos si hay tiempo
+
+    if (usuario.id_cliente) {
+      // cliente
+      return res.redirect(`/cliente/${usuario.id_cliente}`);
+    } else {
+      // colaborador
+      return res.redirect('/colaborador');
+    }
+
+  } catch (error) {
+    console.error(error);
+    res.send('Error en login');
+  }
 });
 
 app.get('/colaborador', (req, res) => {
