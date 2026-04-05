@@ -1,32 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Panel Colaborador</title>
+  <title>Dashboard Colaborador</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #020617;
+      color: white;
+      margin: 0;
+    }
+
+    .container {
+      padding: 30px;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 15px;
+      background: #3b82f6;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .btn:hover {
+      background: #2563eb;
+    }
+  </style>
 </head>
 <body>
-    <h1>Bienvenido, Colaborador</h1>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Panel Colaborador</title>
-</head>
-<body>
 
-<h1>Panel Colaborador</h1>
+<div class="container">
+  <h1>Panel Colaborador</h1>
 
-<h2>Buscar cliente</h2>
+  <div class="card">
+    <h3>Clientes</h3>
+    <a href="/colaborador/clientes" class="btn">Ver clientes</a>
+  </div>
 
-<form action="/buscar-cliente" method="POST">
-  <label>ID del cliente:</label>
-  <input type="number" name="id_cliente" required>
-  <br><br>
-  <button type="submit">Buscar</button>
-</form>
+  <div class="card">
+    <h3>Préstamos</h3>
+    <a href="/colaborador/prestamos" class="btn">Ver préstamos</a>
+  </div>
+</div>
 
 </body>
 </html>
-<a href="/colaborador/pagos-por-vencer">
-    <button>Ver pagos por vencer</button>
-  </a>
