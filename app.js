@@ -592,6 +592,15 @@ app.post('/buscar-cliente', async (req, res) => {
   }); 
   app.get('/crear-colaborador', async (req, res) => {
     try {
+      const existe = await pool.query(
+        'SELECT * FROM usuarios WHERE username = $1',
+        ['colaborador']
+      );
+  
+      if (existe.rows.length > 0) {
+        return res.send('El usuario colaborador ya existe');
+      }
+  
       await pool.query(`
         INSERT INTO usuarios (username, password_hash, estado, id_cliente)
         VALUES ('colaborador', '1234', true, NULL)
@@ -599,7 +608,7 @@ app.post('/buscar-cliente', async (req, res) => {
   
       res.send('Usuario colaborador creado');
     } catch (error) {
-      console.error(error);
+      console.error('ERROR CREANDO COLABORADOR:', error);
       res.send('Error creando colaborador');
     }
   });
