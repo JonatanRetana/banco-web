@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cliente encontrado</title>
+</head>
+<body>
+
+<h1>Datos del Cliente</h1>
+
+<p><strong>ID:</strong> <%= cliente.id_cliente %></p>
+<p><strong>Nombre:</strong> <%= cliente.nombre %></p>
+<p><strong>Apellido:</strong> <%= cliente.apellido %></p>
+<p><strong>DPI:</strong> <%= cliente.dpi %></p>
+<p><strong>NIT:</strong> <%= cliente.nit %></p>
+<p><strong>Correo:</strong> <%= cliente.correo %></p>
+
+<br>
+
+<a href="/cliente/<%= cliente.id_cliente %>">
+  <button>Ver panel del cliente</button>
+</a>
+
+</body>
+</html>
+<a href="/colaborador/cuentas/<%= cliente.id_cliente %>">
+    <button>Ver cuentas del cliente</button>
+  </a>
+  <a href="/colaborador/prestamos/<%= cliente.id_cliente %>">
+    <button>Ver préstamos del cliente</button>
+  </a>
+  <a href="/solicitar-credito/<%= cliente.id_cliente %>">
+    <button>Solicitar crédito para este cliente</button>
+  </a>
+  
+  <a href="/solicitar-cuenta/<%= cliente.id_cliente %>">
+    <button>Solicitar cuenta para este cliente</button>
+  </a>

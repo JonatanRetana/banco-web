@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pagos por Vencer</title>
+</head>
+<body>
+
+<h1>Pagos por vencer</h1>
+
+<ul>
+  <% if (prestamos.length === 0) { %>
+    <li>No hay pagos por vencer</li>
+  <% } else { %>
+    <% prestamos.forEach(prestamo => { %>
+      <li>
+        Cliente: <%= prestamo.nombre %> <%= prestamo.apellido %> -
+        Préstamo #<%= prestamo.id_prestamo %> -
+        Tipo: <%= prestamo.nombre_tipo %> -
+        Monto: Q<%= prestamo.monto %> -
+        Saldo pendiente: Q<%= prestamo.saldo_pendiente %> -
+        Fecha fin: <%= prestamo.fecha_fin %>
+      </li>
+    <% }) %>
+  <% } %>
+</ul>
+
+</body>
+</html>

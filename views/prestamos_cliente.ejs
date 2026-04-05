@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Préstamos del Cliente</title>
+</head>
+<body>
+
+<h1>Préstamos del Cliente</h1>
+
+<ul>
+  <% if (prestamos.length === 0) { %>
+    <li>No hay préstamos</li>
+  <% } else { %>
+    <% prestamos.forEach(prestamo => { %>
+      <li>
+        Préstamo #<%= prestamo.id_prestamo %> -
+        Tipo: <%= prestamo.nombre_tipo %> -
+        Monto: Q<%= prestamo.monto %> -
+        Saldo pendiente: Q<%= prestamo.saldo_pendiente %> -
+        Inicio: <%= prestamo.fecha_inicio %> -
+        Fin: <%= prestamo.fecha_fin %>
+        <form action="/colaborador/pagar" method="POST">
+            <input type="hidden" name="id_prestamo" value="<%= prestamo.id_prestamo %>">
+            <input type="number" name="monto_pago" placeholder="Monto a pagar" required>
+            <button type="submit">Pagar</button>
+          </form>
+          <a href="/colaborador/pagos/<%= prestamo.id_prestamo %>">
+            <button>Ver pagos</button>
+          </a>
+      </li>
+    <% }) %>
+  <% } %>
+</ul>
+
+</body>
+</html>

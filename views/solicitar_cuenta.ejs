@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Solicitar Cuenta</title>
+</head>
+<body>
+
+<h1>Solicitar apertura de cuenta</h1>
+
+<form action="/solicitar-cuenta" method="POST">
+  <input type="hidden" name="id_cliente" value="<%= idCliente %>">
+
+  <label>Tipo de cuenta:</label>
+  <select name="id_tipo_cuenta">
+    <option value="1">Ahorro</option>
+    <option value="2">Monetaria</option>
+  </select>
+
+  <br><br>
+
+  <button type="submit">Enviar solicitud</button>
+</form>
+
+</body>
+</html>

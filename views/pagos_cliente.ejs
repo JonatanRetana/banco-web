@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Historial de Pagos</title>
+</head>
+<body>
+
+<h1>Historial de pagos</h1>
+
+<ul>
+  <% if (pagos.length === 0) { %>
+    <li>No hay pagos registrados</li>
+  <% } else { %>
+    <% pagos.forEach(pago => { %>
+        <li>
+            Monto pagado: Q<%= pago.monto_pagado %> -
+            Fecha: <%= pago.fecha_pago %> -
+            Mora: Q<%= pago.mora %> -
+            Saldo restante: Q<%= pago.saldo_restante %>
+          </li>
+    <% }) %>
+  <% } %>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cuentas del Cliente</title>
+</head>
+<body>
+
+<h1>Cuentas del Cliente</h1>
+
+<ul>
+  <% cuentas.forEach(cuenta => { %>
+    <li>
+      <%= cuenta.numero_cuenta %> -
+      <%= cuenta.nombre_tipo %> -
+      Saldo: Q<%= cuenta.saldo %>
+    </li>
+  <% }) %>
+</ul>
+
+</body>
+</html>

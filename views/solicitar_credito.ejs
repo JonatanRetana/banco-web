@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Solicitar Crédito</title>
+</head>
+<body>
+
+<h1>Solicitar Crédito</h1>
+
+<form action="/solicitar-credito" method="POST">
+  <input type="hidden" name="id_cliente" value="<%= idCliente %>">
+
+  <label>Monto:</label>
+  <input type="number" name="monto" required>
+  <br><br>
+
+  <label>Plazo (meses):</label>
+  <input type="number" name="plazo_meses" required>
+  <br><br>
+
+  <label>Tipo de préstamo:</label>
+  <select name="id_tipo_prestamo">
+    <option value="1">Personal</option>
+    <option value="2">Hipotecario</option>
+  </select>
+  <br><br>
+
+  <button type="submit">Enviar solicitud</button>
+</form>
+
+</body>
+</html>
