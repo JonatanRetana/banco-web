@@ -4,7 +4,7 @@
   <title>Dashboard Colaborador</title>
   <style>
     body {
-      font-family: Arial;
+      font-family: Arial, sans-serif;
       background: #020617;
       color: white;
       margin: 0;
@@ -12,6 +12,8 @@
 
     .container {
       padding: 30px;
+      max-width: 900px;
+      margin: auto;
     }
 
     .card {
@@ -27,11 +29,20 @@
       background: #3b82f6;
       color: white;
       text-decoration: none;
+      border: none;
       border-radius: 5px;
+      cursor: pointer;
     }
 
     .btn:hover {
       background: #2563eb;
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      margin-right: 10px;
     }
   </style>
 </head>
@@ -41,13 +52,16 @@
   <h1>Panel Colaborador</h1>
 
   <div class="card">
-    <h3>Clientes</h3>
-    <a href="/colaborador/clientes" class="btn">Ver clientes</a>
+    <h3>Buscar cliente</h3>
+    <form action="/buscar-cliente" method="POST">
+      <input type="number" name="id_cliente" placeholder="ID del cliente" required>
+      <button type="submit" class="btn">Buscar cliente</button>
+    </form>
   </div>
 
   <div class="card">
-    <h3>Préstamos</h3>
-    <a href="/colaborador/prestamos" class="btn">Ver préstamos</a>
+    <h3>Pagos por vencer</h3>
+    <a href="/colaborador/pagos-por-vencer" class="btn">Ver pagos por vencer</a>
   </div>
 </div>
 
