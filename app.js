@@ -589,6 +589,19 @@ app.post('/buscar-cliente', async (req, res) => {
       console.error('ERROR AL OBTENER PAGOS:', error);
       res.send('Error al obtener pagos');
     }
+  }); 
+  app.get('/crear-colaborador', async (req, res) => {
+    try {
+      await pool.query(`
+        INSERT INTO usuarios (username, password_hash, estado, id_cliente)
+        VALUES ('colaborador', '1234', true, NULL)
+      `);
+  
+      res.send('Usuario colaborador creado');
+    } catch (error) {
+      console.error(error);
+      res.send('Error creando colaborador');
+    }
   });
 app.listen(PORT, async () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);
